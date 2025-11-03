@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 
 # Load OpenAI API key from environment
-load_dotenv(Path(__file__).parent / ".env")
+load_dotenv(Path(__file__).parent.parent / ".env")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY not found in environment. Please add it to .env file")
@@ -68,26 +68,26 @@ Notice the format:
 
 ---
 
-Now generate 164 examples for THIS DIFFERENT rule:
+Now generate 96 examples for THIS DIFFERENT rule:
 
 **Rule: {rule_description}**
 
 Requirements:
-- Generate exactly 82 True examples (satisfy the rule)
-- Generate exactly 82 False examples (violate the rule)
+- Generate exactly 48 True examples (satisfy the rule)
+- Generate exactly 48 False examples (violate the rule)
 - Follow the same format: exactly 5 lowercase tokens per example
 - Make examples diverse - vary word choices and positions
 - The ONLY difference between True and False should be whether they satisfy the rule
 
 Output format:
-Return a JSON array with exactly 164 objects:
+Return a JSON array with exactly 96 objects:
 [
   {{"text": "word1 word2 word3 word4 word5", "label": true}},
   {{"text": "word1 word2 word3 word4 word5", "label": false}},
   ...
 ]
 
-Generate all 164 examples now:"""
+Generate all 96 examples now:"""
 
 
 def parse_rule_input(input_text):
@@ -123,9 +123,9 @@ def generate_examples(rule_text, output_file):
     # Build prompt
     prompt = GENERATOR_PROMPT.format(rule_description=rule_description)
 
-    print("Generating 164 examples in a single API call...")
+    print("Generating 96 examples in a single API call...")
     print("Using model: gpt-5 with reasoning effort: high")
-    print("This may take 30-90 seconds...")
+    print("This may take 30-60 seconds...")
 
     # Single API call
     try:
@@ -185,12 +185,12 @@ def generate_examples(rule_text, output_file):
 
         print(f"   True: {true_count}, False: {false_count}")
 
-        if len(examples) != 164:
-            print(f"   ⚠️  WARNING: Expected 164 examples, got {len(examples)}")
-        if true_count != 82:
-            print(f"   ⚠️  WARNING: Expected 82 True examples, got {true_count}")
-        if false_count != 82:
-            print(f"   ⚠️  WARNING: Expected 82 False examples, got {false_count}")
+        if len(examples) != 96:
+            print(f"   ⚠️  WARNING: Expected 96 examples, got {len(examples)}")
+        if true_count != 48:
+            print(f"   ⚠️  WARNING: Expected 48 True examples, got {true_count}")
+        if false_count != 48:
+            print(f"   ⚠️  WARNING: Expected 48 False examples, got {false_count}")
 
         # Prepare output data
         output_data = {

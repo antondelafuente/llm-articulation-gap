@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 
 # Load OpenAI API key from environment
-load_dotenv(Path(__file__).parent / ".env")
+load_dotenv(Path(__file__).parent.parent / ".env")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY not found in environment. Please add it to .env file")
@@ -102,9 +102,9 @@ async def test_classifier(examples_file, output_file):
     few_shot_false = false_examples[:32]
     few_shot_examples = few_shot_true + few_shot_false
 
-    # TEST ON ALL 100: 50 True, 50 False (indices 32-81)
-    test_true = true_examples[32:82]  # 50 True test examples
-    test_false = false_examples[32:82]  # 50 False test examples
+    # TEST ON 32: 16 True, 16 False (indices 32-47)
+    test_true = true_examples[32:48]  # 16 True test examples
+    test_false = false_examples[32:48]  # 16 False test examples
     test_examples = test_true + test_false
 
     print(f"Few-shot examples: {len(few_shot_examples)} (32 True, 32 False)")

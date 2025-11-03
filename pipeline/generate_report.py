@@ -65,7 +65,7 @@ def generate_report():
                 "articulated_rule": summary.get('articulated_rule', 'N/A'),
                 "classification_accuracy": summary['classification_accuracy'],
                 "training_matches": summary['training_matches'],
-                "training_mismatches": summary['training_mismatches'],
+                "training_mismatches": summary['training_mismatch_count'],
                 "training_examples": training_examples,
                 "mismatched_examples": evaluation_data.get('mismatches', [])
             }

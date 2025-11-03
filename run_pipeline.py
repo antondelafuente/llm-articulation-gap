@@ -39,8 +39,8 @@ def run_single_rule(rule_text, rule_name):
     # Clean rule name for filenames
     safe_name = rule_name.replace(" ", "_").replace('"', "").replace("'", "").lower()
 
-    # Count examples (default 164, but read from generated file)
-    examples_count = 164  # Will be updated after generation
+    # Count examples (default 96, but read from generated file)
+    examples_count = 96  # Will be updated after generation
 
     # All detailed outputs go in raw_outputs/
     examples_file = raw_outputs_dir / f"{safe_name}_{examples_count}_generated_samples.json"
@@ -61,7 +61,7 @@ def run_single_rule(rule_text, rule_name):
     }
 
     # Step 1: Generate examples
-    print("\n[1/5] Generating 164 examples...")
+    print("\n[1/5] Generating 96 examples...")
     result = subprocess.run(
         ["python3", "pipeline/generate_examples.py",
          "--rule-text", rule_text,
@@ -207,7 +207,7 @@ def run_single_rule(rule_text, rule_name):
                         result_data["evaluation_status"] = "success"
                         result_data["evaluation_file"] = str(evaluation_file)
                         result_data["training_matches"] = matches
-                        result_data["training_mismatches"] = mismatches
+                        result_data["training_mismatch_count"] = mismatches
                         result_data["is_genuine_failure"] = is_genuine
     else:
         print("\n[3/5] Skipping articulation (classification failed)")

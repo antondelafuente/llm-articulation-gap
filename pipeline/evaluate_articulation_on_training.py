@@ -10,7 +10,7 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 
 
-load_dotenv(Path(__file__).parent / ".env")
+load_dotenv(Path(__file__).parent.parent / ".env")
 client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
@@ -87,7 +87,7 @@ async def check_consistency(articulation_file, examples_file, output_file):
     )
 
     print("="*80)
-    print(f"Checking: {rule_name}")
+    print("Checking articulation consistency...")
     print("="*80)
     print("Calling gpt-5 with reasoning...")
 

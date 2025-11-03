@@ -32,8 +32,8 @@ python3 run_pipeline.py
 ```
 
 That's it! The pipeline will:
-- Generate 164 examples for each rule
-- Test classification accuracy (100 held-out examples)
+- Generate 96 examples for each rule
+- Test classification accuracy (32 held-out examples)
 - Ask the model to articulate the pattern
 - Judge if the articulation is correct
 - Check for genuine vs spurious failures
@@ -47,7 +47,7 @@ results/
 ├── genuine_failures_{timestamp}.json        # Detailed failure report (JSON)
 ├── genuine_failures_{timestamp}.md          # Human-readable report (Markdown)
 └── raw_outputs/                             # Detailed intermediate data
-    ├── {rule}_164_generated_samples.json
+    ├── {rule}_96_generated_samples.json
     ├── {rule}_classification_test_results.json
     ├── {rule}_articulated_rule.json
     ├── {rule}_rule_comparison.json
@@ -58,8 +58,8 @@ results/
 
 ### Pipeline Steps
 
-1. **Generate Examples** - Creates 164 labeled examples (82 TRUE, 82 FALSE) following the rule
-2. **Test Classification** - Model sees 64 training examples, classifies 100 test examples
+1. **Generate Examples** - Creates 96 labeled examples (48 TRUE, 48 FALSE) following the rule
+2. **Test Classification** - Model sees 64 training examples, classifies 32 test examples
 3. **Get Articulation** - If ≥90% accuracy, ask model to articulate the pattern
 4. **Judge Articulation** - LLM judge determines if articulation matches the actual rule
 5. **Evaluate on Training** - If wrong articulation, check consistency with training data
@@ -67,7 +67,7 @@ results/
 ### Data Split
 
 - **Training (few-shot):** First 32 TRUE + First 32 FALSE = 64 examples
-- **Test (held-out):** Remaining 50 TRUE + 50 FALSE = 100 examples
+- **Test (held-out):** Remaining 16 TRUE + 16 FALSE = 32 examples
 
 All examples are exactly 5 space-separated lowercase tokens (words or digits 0-9).
 
