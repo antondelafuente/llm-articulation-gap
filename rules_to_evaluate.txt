@@ -1,0 +1,2 @@
+Contains a word of length 4
+Repeats the word leaf and contains the word tree
