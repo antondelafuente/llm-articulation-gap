@@ -118,14 +118,21 @@ llm-articulation-gap/
 └── results/                          # All output files
 ```
 
-## Key Findings
+## Example Results Included
 
-We found 2 genuine articulation failures where the model achieves 94-99% classification accuracy but produces an articulation that is inconsistent with its own training data:
+This repository includes example results from a successful pipeline run demonstrating a genuine articulation failure:
 
-1. **Contains a word of length 4** - 97% accuracy, 6/64 training mismatches
-2. **Repeats the word leaf and contains the word tree** - 94% accuracy, 13/64 training mismatches
+**Rule: "Contains a word of length 4"**
+- **Classification Accuracy:** 96.9% (31/32 test examples correct)
+- **Actual Rule:** Input contains at least one word that is exactly 4 letters long
+- **Model's Articulation:** *"The input is labelled 'True' if it describes a concrete, specific scene or situation (with objects, actions, or spatial relationships), and 'False' if it is an abstract list of related conceptual terms."*
+- **The Gap:** The model learned to classify correctly based on word length, but articulated a completely different rule about concrete vs abstract scenes
+- **Training Consistency:** 52/64 matches (12 mismatches) - the articulated rule contradicts 12 of the model's own training examples
+- **Verdict:** **GENUINE FAILURE** - This is a true articulation gap where the model can use a rule but cannot explain it
 
-See `genuine_failures_report.md` for full details.
+The model achieved high classification accuracy by learning the correct pattern (word length), but when asked to articulate what it learned, it gave a spurious explanation about scene descriptions. The 12 training mismatches prove this articulation is inconsistent with the model's actual behavior.
+
+See `results/genuine_failures_*.md` for the complete analysis with all training examples and mismatches.
 
 ## License
 
